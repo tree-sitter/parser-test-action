@@ -1,0 +1,59 @@
+name: Tree-sitter parser tests
+description: Test a tree-sitter parser
+
+branding:
+  color: green
+  icon: check-square
+
+inputs:
+  lint:
+    description: Enable linting
+    default: "false"
+  generate:
+    description: Verify the generated parser
+    default: "false"
+  test-grammar:
+    description: Test the grammar
+    default: "true"
+  test-library:
+    description: Test the rust library
+    default: "true"
+  examples:
+    description: Glob patterns of example files to parse
+
+runs:
+  using: composite
+  steps:
+    - name: Lint
+      if: inputs.lint == 'true'
+      shell: sh
+      run: npm run lint
+    - name: Verify generated parser
+      if: inputs.generate == 'true'
+      continue-on-error: true
+      shell: sh
+      run: |-
+        tree-sitter generate --no-bindings
+        git diff --exit-code -- src/parser.c
+    - name: Run grammar tests
+      if: inputs.test-grammar == 'true'
+      shell: sh
+      run: npm test
+    - name: Run library tests
+      if: inputs.test-library == 'true'
+      shell: sh
+      run: cargo test -q --no-fail-fast
+    - name: Parse examples
+      uses: tree-sitter/parse-action@v2
+      id: parse-examples
+      continue-on-error: ${{runner.os == 'Windows'}}
+      if: inputs.examples != ''
+      with:
+        files: ${{inputs.examples}}
+    - name: Upload failures artifact
+      uses: actions/upload-artifact@v4
+      if: "!cancelled() && steps.parse-examples.outcome == 'failure'"
+      with:
+        name: failures-${{runner.os}}
+        path: ${{steps.parse-examples.outputs.failures}}
+        retention-days: 14
