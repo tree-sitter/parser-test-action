@@ -18,8 +18,10 @@ inputs:
   test-library:
     description: Test the rust library
     default: "true"
-  examples:
-    description: Glob patterns of example files to parse
+  corpus-files:
+    description: Glob patterns of files to parse
+  invalid-files:
+    description: Glob patterns of files with syntax errors
 
 runs:
   using: composite
@@ -44,12 +46,13 @@ runs:
       shell: sh
       run: cargo test -q --no-fail-fast
     - name: Parse examples
-      uses: tree-sitter/parse-action@v2
+      uses: tree-sitter/parse-action@v3
       id: parse-examples
       continue-on-error: ${{runner.os == 'Windows'}}
-      if: inputs.examples != ''
+      if: inputs.corpus-files != ''
       with:
-        files: ${{inputs.examples}}
+        files: ${{inputs.corpus-files}}
+        invalid-files: ${{inputs.invalid-files}}
     - name: Upload failures artifact
       uses: actions/upload-artifact@v4
       if: "!cancelled() && steps.parse-examples.outcome == 'failure'"

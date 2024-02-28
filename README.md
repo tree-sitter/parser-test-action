@@ -15,8 +15,10 @@ test-grammar:
 test-library:
   description: Test the rust library
   default: true
-examples:
-  description: Glob patterns of example files to parse
+corpus-files:
+  description: Glob patterns of files to parse
+invalid-files:
+  description: Glob patterns of files with syntax errors
 ```
 
 ## Example configuration
@@ -47,8 +49,8 @@ jobs:
       - uses: tree-sitter/parser-setup-action@v1.1
         with:
           node-version: 20
-      - uses: tree-sitter/parser-test-action@v1.1
+      - uses: tree-sitter/parser-test-action@v1.2
         with:
-          examples: |-
+          corpus-files: |-
             examples/*
 ```
