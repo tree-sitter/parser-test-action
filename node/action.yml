@@ -1,0 +1,23 @@
+name: Tree-sitter parser test (Node.js)
+description: Test a tree-sitter parser in Node.js
+
+inputs:
+  node-version:
+    description: Node.js version
+    default: stable
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        cache: npm
+        node-version: ${{inputs.node-version}}
+        cache-dependency-path: package.json
+    - name: Build module
+      shell: sh
+      run: npm install
+    - name: Run tests
+      shell: sh
+      run: node --test bindings/node/*_test.js

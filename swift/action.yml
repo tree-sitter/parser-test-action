@@ -1,0 +1,21 @@
+name: Tree-sitter parser test (Swift)
+description: Test a tree-sitter parser in Swift
+
+inputs:
+  swift-version:
+    description: Swift version
+    default: "5.10"
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Swift
+      uses: swift-actions/setup-swift@v2
+      with:
+        swift-version: ${{inputs.swift-version}}
+    - name: Build module
+      shell: sh
+      run: swift build --build-tests
+    - name: Run tests
+      shell: sh
+      run: swift test --skip-build -q

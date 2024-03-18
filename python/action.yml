@@ -1,0 +1,23 @@
+name: Tree-sitter parser test (Python)
+description: Test a tree-sitter parser in Python
+
+inputs:
+  python-version:
+    description: Python version
+    default: "3.12"
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        cache: pip
+        python-version: ${{inputs.python-version}}
+        cache-dependency-path: pyproject.toml
+    - name: Build module
+      shell: sh
+      run: pip install -e .[core]
+    - name: Run tests
+      shell: sh
+      run: python -munittest discover -v -s bindings/python -p '*_test.py'

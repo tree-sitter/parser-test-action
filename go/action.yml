@@ -1,0 +1,24 @@
+name: Tree-sitter parser test (Go)
+description: Test a tree-sitter parser in Go
+
+inputs:
+  go-version:
+    description: Go version
+    default: "1.22"
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{inputs.go-version}}
+        cache-dependency-path: bindings/go/go.mod
+    - name: Build module
+      working-directory: bindings/go
+      shell: bash
+      run: go get -t && go generate
+    - name: Run tests
+      working-directory: bindings/go
+      shell: sh
+      run: go test -v

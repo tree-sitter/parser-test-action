@@ -1,0 +1,22 @@
+name: Tree-sitter parser test (Rust)
+description: Test a tree-sitter parser in Rust
+
+inputs:
+  rust-version:
+    description: Rust version
+    default: stable
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Rust
+      uses: actions-rust-lang/setup-rust-toolchain@v1.8
+      with:
+        cache: true
+        toolchain: ${{inputs.rust-version}}
+    - name: Build module
+      shell: sh
+      run: cargo build
+    - name: Run tests
+      shell: sh
+      run: cargo test -q --no-fail-fast

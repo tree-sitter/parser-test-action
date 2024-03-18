@@ -12,16 +12,42 @@ inputs:
   generate:
     description: Verify the generated parser
     default: "false"
-  test-grammar:
-    description: Test the grammar
+  test-parser:
+    description: Test the parser
     default: "true"
-  test-library:
-    description: Test the rust library
-    default: "true"
-  corpus-files:
-    description: Glob patterns of files to parse
-  invalid-files:
-    description: Glob patterns of files with syntax errors
+  test-parser-cmd:
+    description: Command that tests the parser
+    default: tree-sitter test
+  test-rust:
+    description: Test the Rust bindings
+    default: "false"
+  rust-version:
+    description: Rust version
+    default: stable
+  test-node:
+    description: Test the Node bindings
+    default: "false"
+  node-version:
+    description: Node.js version
+    default: latest
+  test-python:
+    description: Test the Python bindings
+    default: "false"
+  python-version:
+    description: Python version
+    default: "3.12"
+  test-go:
+    description: Test the Go bindings
+    default: "false"
+  go-version:
+    description: Go version
+    default: "1.22"
+  test-swift:
+    description: Test the Swift bindings
+    default: "false"
+  swift-version:
+    description: Swift version
+    default: "5.10"
 
 runs:
   using: composite
@@ -37,26 +63,28 @@ runs:
       run: |-
         tree-sitter generate --no-bindings
         git diff --exit-code -- src/parser.c
-    - name: Run grammar tests
-      if: inputs.test-grammar == 'true'
+    - name: Run parser tests
+      if: inputs.test-parser == 'true'
       shell: sh
-      run: npm test
-    - name: Run library tests
-      if: inputs.test-library == 'true'
-      shell: sh
-      run: cargo test -q --no-fail-fast
-    - name: Parse examples
-      uses: tree-sitter/parse-action@v3
-      id: parse-examples
-      continue-on-error: ${{runner.os == 'Windows'}}
-      if: inputs.corpus-files != ''
+      run: ${{inputs.test-parser-cmd}}
+    - name: Run Rust tests
+      uses: tree-sitter/parser-test-action/rust@v2
+      if: inputs.test-rust == 'true'
       with:
-        files: ${{inputs.corpus-files}}
-        invalid-files: ${{inputs.invalid-files}}
-    - name: Upload failures artifact
-      uses: actions/upload-artifact@v4
-      if: "!cancelled() && steps.parse-examples.outcome == 'failure'"
+        rust-version: ${{inputs.rust-version}}
+    - name: Run Node tests
+      uses: tree-sitter/parser-test-action/node@v2
+      if: inputs.test-node == 'true'
       with:
-        name: failures-${{runner.os}}
-        path: ${{steps.parse-examples.outputs.failures}}
-        retention-days: 14
+        node-version: ${{inputs.node-version}}
+    - name: Run Python tests
+      uses: tree-sitter/parser-test-action/python@v2
+      if: inputs.test-python == 'true'
+      with:
+        python-version: ${{inputs.python-version}}
+    - name: Run Go tests
+      uses: tree-sitter/parser-test-action/go@v2
+      if: inputs.test-go == 'true'
+    - name: Run Swift tests
+      uses: tree-sitter/parser-test-action/swift@v2
+      if: inputs.test-swift == 'true' && runner.os != 'Windows'

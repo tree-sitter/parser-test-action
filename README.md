@@ -6,19 +6,52 @@
 lint:
   description: Enable linting
   default: false
+
 generate:
   description: Verify the generated parser
   default: false
-test-grammar:
-  description: Test the grammar
+
+test-parser:
+  description: Test the parser
   default: true
-test-library:
-  description: Test the rust library
-  default: true
-corpus-files:
-  description: Glob patterns of files to parse
-invalid-files:
-  description: Glob patterns of files with syntax errors
+test-parser-cmd:
+  description: Command that tests the parser
+  default: tree-sitter test
+
+test-rust:
+  description: Test the Rust bindings
+  default: false
+rust-version:
+  description: Rust version
+  default: stable
+
+test-node:
+  description: Test the Node bindings
+  default: false
+node-version:
+  description: Node.js version
+  default: latest
+
+test-python:
+  description: Test the Python bindings
+  default: false
+python-version:
+  description: Python version
+  default: "3.12"
+
+test-go:
+  description: Test the Go bindings
+  default: false
+go-version:
+  description: Go version
+  default: "1.22"
+
+test-swift:
+  description: Test the Swift bindings
+  default: false
+swift-version:
+  description: Swift version
+  default: "5.10"
 ```
 
 ## Example configuration
@@ -41,16 +74,18 @@ on:
       - bindings/**
       - binding.gyp
 
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: tree-sitter/parser-setup-action@v1.1
+      - uses: actions/checkout@v4
+      - uses: tree-sitter/setup-action/cli@v1
+      - uses: tree-sitter/parser-test-action@v2
         with:
-          node-version: 20
-      - uses: tree-sitter/parser-test-action@v1.2
-        with:
-          corpus-files: |-
-            examples/*
+          test-rust: true
 ```
