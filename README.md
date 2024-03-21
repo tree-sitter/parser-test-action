@@ -3,10 +3,6 @@
 ## Options
 
 ```yaml
-lint:
-  description: Enable linting
-  default: false
-
 generate:
   description: Verify the generated parser
   default: false

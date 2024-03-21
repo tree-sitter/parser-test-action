@@ -6,9 +6,6 @@ branding:
   icon: check-square
 
 inputs:
-  lint:
-    description: Enable linting
-    default: "false"
   generate:
     description: Verify the generated parser
     default: "false"
@@ -52,10 +49,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Lint
-      if: inputs.lint == 'true'
-      shell: sh
-      run: npm run lint
     - name: Verify generated parser
       if: inputs.generate == 'true'
       continue-on-error: true
