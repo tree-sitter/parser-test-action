@@ -16,8 +16,8 @@ runs:
         cache-dependency-path: bindings/go/go.mod
     - name: Build module
       working-directory: bindings/go
-      shell: bash
-      run: go get -t && go generate
+      shell: sh
+      run: go get -t
     - name: Run tests
       working-directory: bindings/go
       shell: sh
