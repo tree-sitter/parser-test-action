@@ -18,6 +18,10 @@ runs:
     - name: Build module
       shell: sh
       run: pip install -e .[core]
+    - name: Check module metadata depedencies
+      shell: sh
+      working-directory: ${{github.action_path}}
+      run: python -mpip install requests && python python/check_metadata.py
     - name: Run tests
       shell: sh
       run: python -munittest discover -v -s bindings/python -p '*_test.py'
