@@ -20,4 +20,4 @@ runs:
       run: pip install -e .[core]
     - name: Run tests
       shell: sh
-      run: python -munittest discover -v -s bindings/python -p '*_test.py'
+      run: python -munittest discover -v -s bindings/python/tests
