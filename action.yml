@@ -51,7 +51,6 @@ runs:
   steps:
     - name: Verify generated parser
       if: inputs.generate == 'true'
-      continue-on-error: true
       shell: sh
       run: |-
         tree-sitter generate --no-bindings
