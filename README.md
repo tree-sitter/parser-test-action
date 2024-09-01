@@ -33,14 +33,14 @@ test-python:
   default: false
 python-version:
   description: Python version
-  default: "3.12"
+  default: "3.11"
 
 test-go:
   description: Test the Go bindings
   default: false
 go-version:
   description: Go version
-  default: "1.22"
+  default: "1.23"
 
 test-swift:
   description: Test the Swift bindings

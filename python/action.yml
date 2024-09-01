@@ -4,7 +4,7 @@ description: Test a tree-sitter parser in Python
 inputs:
   python-version:
     description: Python version
-    default: "3.12"
+    default: "3.11"
 
 runs:
   using: composite

@@ -4,7 +4,7 @@ description: Test a tree-sitter parser in Go
 inputs:
   go-version:
     description: Go version
-    default: "1.22"
+    default: "1.23"
 
 runs:
   using: composite
@@ -13,7 +13,7 @@ runs:
       uses: actions/setup-go@v5
       with:
         go-version: ${{inputs.go-version}}
-        cache-dependency-path: bindings/go/go.mod
+        cache-dependency-path: go.mod
     - name: Build module
       working-directory: bindings/go
       shell: sh
