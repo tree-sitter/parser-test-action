@@ -16,7 +16,7 @@ runs:
         toolchain: ${{inputs.rust-version}}
     - name: Build module
       shell: sh
-      run: cargo build
+      run: cargo build --all-features
     - name: Run tests
       shell: sh
-      run: cargo test -q --no-fail-fast
+      run: cargo test -q --all-features --no-fail-fast
