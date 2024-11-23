@@ -53,7 +53,7 @@ runs:
       if: inputs.generate == 'true'
       shell: sh
       run: |-
-        tree-sitter generate --no-bindings
+        tree-sitter generate
         git diff --exit-code -- src/parser.c
     - name: Run parser tests
       if: inputs.test-parser == 'true'
