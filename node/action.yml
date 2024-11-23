@@ -14,7 +14,7 @@ runs:
       with:
         cache: npm
         node-version: ${{inputs.node-version}}
-        cache-dependency-path: package.json
+        cache-dependency-path: package-lock.json
     - name: Build module
       shell: sh
       run: npm install
