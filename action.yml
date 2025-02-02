@@ -97,6 +97,8 @@ runs:
     - name: Run Go tests
       uses: tree-sitter/parser-test-action/go@v2
       if: inputs.test-go == 'true'
+      with:
+        go-version: ${{inputs.go-version}}
     - name: Run Swift tests
       uses: tree-sitter/parser-test-action/swift@v2
       if: inputs.test-swift == 'true'
