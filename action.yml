@@ -44,14 +44,14 @@ inputs:
     default: "false"
   swift-version:
     description: Swift version
-    default: "5.10"
+    default: "6.1"
 
 runs:
   using: composite
   steps:
     - name: Verify generated parser
       if: inputs.generate == 'true'
-      shell: sh
+      shell: bash
       run: |-
         JQ_SCRIPT='.dependencies | del(."node-addon-api", ."node-gyp-build") | length > 0'
         if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
