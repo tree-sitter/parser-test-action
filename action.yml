@@ -26,7 +26,7 @@ inputs:
     default: "false"
   node-version:
     description: Node.js version
-    default: latest
+    default: "lts/*"
   test-python:
     description: Test the Python bindings
     default: "false"
