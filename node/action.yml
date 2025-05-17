@@ -4,7 +4,7 @@ description: Test a tree-sitter parser in Node.js
 inputs:
   node-version:
     description: Node.js version
-    default: "lts/*"
+    default: stable
 
 runs:
   using: composite

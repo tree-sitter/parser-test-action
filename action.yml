@@ -26,25 +26,25 @@ inputs:
     default: "false"
   node-version:
     description: Node.js version
-    default: ${{vars.NODE_VERSION || "lts/*"}}
+    default: latest
   test-python:
     description: Test the Python bindings
     default: "false"
   python-version:
     description: Python version
-    default: ${{vars.PYTHON_VERSION || "3.12"}}
+    default: "3.12"
   test-go:
     description: Test the Go bindings
     default: "false"
   go-version:
     description: Go version
-    default: ${{vars.GO_VERSION || "1.22"}}
+    default: "1.22"
   test-swift:
     description: Test the Swift bindings
     default: "false"
   swift-version:
     description: Swift version
-    default: ${{vars.SWIFT_VERSION || "6.1"}}
+    default: "6.1"
 
 runs:
   using: composite
