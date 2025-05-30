@@ -5,7 +5,7 @@
 ```yaml
 generate:
   description: Verify the generated parser
-  default: false
+  default: true
 
 test-parser:
   description: Test the parser
