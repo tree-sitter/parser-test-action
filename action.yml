@@ -1,3 +1,4 @@
+---
 name: Tree-sitter parser tests
 description: Test a tree-sitter parser
 
@@ -9,6 +10,9 @@ inputs:
   generate:
     description: Verify the generated parser
     default: "true"
+  generate-cmd:
+    description: Command that generates the parser
+    default: tree-sitter generate
   test-parser:
     description: Test the parser
     default: "true"
@@ -57,7 +61,7 @@ runs:
         if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
           npm ci --omit dev --omit peer --omit optional
         fi
-        tree-sitter generate
+        ${{inputs.generate-cmd}}
         [[ ! -d node_modules ]] || rm -rf node_modules
         git diff --exit-code -- src/parser.c
     - name: Run parser tests
