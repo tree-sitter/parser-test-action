@@ -57,9 +57,13 @@ runs:
         if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
           npm ci --omit dev --omit peer --omit optional
         fi
-        tree-sitter generate
-        [[ ! -d node_modules ]] || rm -rf node_modules
-        git diff --exit-code -- src/parser.c
+        while read -r grammar; do
+          grammar_dir=$(dirname "$grammar")
+          cd "$grammar_dir"
+          tree-sitter generate
+          cd - > /dev/null
+        done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
+        git diff --exit-code -- $(find . -name parser.c -not -path './node_modules/*' -not -path './.build/*')
     - name: Run parser tests
       if: inputs.test-parser == 'true'
       shell: sh
