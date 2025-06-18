@@ -5,7 +5,10 @@
 ```yaml
 generate:
   description: Verify the generated parser
-  default: false
+  default: true
+abi-version:
+  description: The tree-sitter ABI version
+  default: "15"
 
 test-parser:
   description: Test the parser
@@ -83,5 +86,6 @@ jobs:
       - uses: tree-sitter/setup-action/cli@v1
       - uses: tree-sitter/parser-test-action@v2
         with:
+          abi-version: 14
           test-rust: true
 ```

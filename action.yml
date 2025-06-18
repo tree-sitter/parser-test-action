@@ -9,6 +9,9 @@ inputs:
   generate:
     description: Verify the generated parser
     default: "true"
+  abi-version:
+    description: The tree-sitter ABI version
+    default: "15"
   test-parser:
     description: Test the parser
     default: "true"
@@ -64,6 +67,8 @@ runs:
           cd - > /dev/null
         done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
         git diff --exit-code -- $(find . -name parser.c -not -path './node_modules/*' -not -path './.build/*')
+      env:
+        TREE_SITTER_ABI_VERSION: ${{inputs.abi-version}}
     - name: Run parser tests
       if: inputs.test-parser == 'true'
       shell: sh
