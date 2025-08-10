@@ -22,14 +22,14 @@ test-rust:
   default: false
 rust-version:
   description: Rust version
-  default: stable
+  default: "stable"
 
 test-node:
   description: Test the Node bindings
   default: false
 node-version:
   description: Node.js version
-  default: latest
+  default: "lts/*"
 
 test-python:
   description: Test the Python bindings
@@ -50,7 +50,7 @@ test-swift:
   default: false
 swift-version:
   description: Swift version
-  default: "5.10"
+  default: "6.1"
 ```
 
 ## Example configuration
@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: tree-sitter/setup-action/cli@v1
+      - uses: tree-sitter/setup-action/cli@v2
       - uses: tree-sitter/parser-test-action@v2
         with:
           abi-version: 14
