@@ -13,7 +13,7 @@ runs:
       uses: actions/setup-go@v5
       with:
         go-version: ${{inputs.go-version}}
-        cache-dependency-path: go.mod
+        cache-dependency-path: go.*
     - name: Build module
       working-directory: bindings/go
       shell: sh
