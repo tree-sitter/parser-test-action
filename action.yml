@@ -93,6 +93,6 @@ runs:
       if: inputs.test-go == 'true'
     - name: Run Swift tests
       uses: tree-sitter/parser-test-action/swift@v2
-      if: inputs.test-swift == 'true' && runner.os != 'Windows'
+      if: inputs.test-swift == 'true'
       with:
         swift-version: ${{inputs.swift-version}}
