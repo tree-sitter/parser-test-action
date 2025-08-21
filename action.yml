@@ -54,6 +54,12 @@ inputs:
   zig-version:
     description: Zig version
     default: "0.15.1"
+  test-java:
+    description: Test the Java bindings
+    default: "false"
+  java-version:
+    description: Java version
+    default: "25"
 
 runs:
   using: composite
@@ -109,3 +115,8 @@ runs:
       if: inputs.test-zig == 'true'
       with:
         zig-version: ${{inputs.zig-version}}
+    - name: Run Java tests
+      uses: tree-sitter/parser-test-action/java@v3
+      if: inputs.test-java == 'true'
+      with:
+        java-version: ${{inputs.java-version}}
