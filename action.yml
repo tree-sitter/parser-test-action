@@ -48,6 +48,12 @@ inputs:
   swift-version:
     description: Swift version
     default: "6.1"
+  test-java:
+    description: Test the Java bindings
+    default: "false"
+  java-version:
+    description: Java version
+    default: "22"
 
 runs:
   using: composite
@@ -96,3 +102,8 @@ runs:
       if: inputs.test-swift == 'true'
       with:
         swift-version: ${{inputs.swift-version}}
+    - name: Run Java tests
+      uses: tree-sitter/parser-test-action/java@v2
+      if: inputs.test-java == 'true'
+      with:
+        java-version: ${{inputs.java-version}}

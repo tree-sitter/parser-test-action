@@ -51,6 +51,13 @@ test-swift:
 swift-version:
   description: Swift version
   default: "6.1"
+
+test-java:
+  description: Test the Java bindings
+  default: "false"
+java-version:
+  description: Java version
+  default: "22"
 ```
 
 ## Example configuration
