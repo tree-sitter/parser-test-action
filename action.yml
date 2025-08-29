@@ -48,6 +48,12 @@ inputs:
   swift-version:
     description: Swift version
     default: "6.1"
+  test-zig:
+    description: Test the Zig bindings
+    default: "false"
+  zig-version:
+    description: Zig version
+    default: "0.15.1"
 
 runs:
   using: composite
@@ -96,3 +102,8 @@ runs:
       if: inputs.test-swift == 'true'
       with:
         swift-version: ${{inputs.swift-version}}
+    - name: Run Zig tests
+      uses: tree-sitter/parser-test-action/zig@v2
+      if: inputs.test-zig == 'true'
+      with:
+        zig-version: ${{inputs.zig-version}}

@@ -51,6 +51,13 @@ test-swift:
 swift-version:
   description: Swift version
   default: "6.1"
+
+test-zig:
+  description: Test the Zig bindings
+  default: false
+swift-version:
+  description: Zig version
+  default: "0.15.1"
 ```
 
 ## Example configuration

@@ -1,0 +1,22 @@
+name: Tree-sitter parser test (Zig)
+description: Test a tree-sitter parser in Zig
+
+inputs:
+  zig-version:
+    description: Zig version
+    default: "0.15.1"
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Zig
+      uses: mlugg/setup-zig@v2
+      with:
+        version: ${{inputs.zig-version}}
+        use-tool-cache: true
+    - name: Build module
+      shell: sh
+      run: zig build
+    - name: Run tests
+      shell: sh
+      run: zig build test
