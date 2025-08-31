@@ -55,7 +55,7 @@ swift-version:
 test-zig:
   description: Test the Zig bindings
   default: false
-swift-version:
+zig-version:
   description: Zig version
   default: "0.15.1"
 ```

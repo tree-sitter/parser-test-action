@@ -103,7 +103,7 @@ runs:
       with:
         swift-version: ${{inputs.swift-version}}
     - name: Run Zig tests
-      uses: tree-sitter/parser-test-action/zig@v2
+      uses: tree-sitter/parser-test-action/zig@master
       if: inputs.test-zig == 'true'
       with:
         zig-version: ${{inputs.zig-version}}
