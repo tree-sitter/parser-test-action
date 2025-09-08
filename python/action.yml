@@ -10,7 +10,7 @@ runs:
   using: composite
   steps:
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         cache: pip
         python-version: ${{inputs.python-version}}
