@@ -80,32 +80,32 @@ runs:
       shell: sh
       run: ${{inputs.test-parser-cmd}}
     - name: Run Rust tests
-      uses: tree-sitter/parser-test-action/rust@v2
+      uses: tree-sitter/parser-test-action/rust@v3
       if: inputs.test-rust == 'true'
       with:
         rust-version: ${{inputs.rust-version}}
     - name: Run Node tests
-      uses: tree-sitter/parser-test-action/node@v2
+      uses: tree-sitter/parser-test-action/node@v3
       if: inputs.test-node == 'true'
       with:
         node-version: ${{inputs.node-version}}
     - name: Run Python tests
-      uses: tree-sitter/parser-test-action/python@v2
+      uses: tree-sitter/parser-test-action/python@v3
       if: inputs.test-python == 'true'
       with:
         python-version: ${{inputs.python-version}}
     - name: Run Go tests
-      uses: tree-sitter/parser-test-action/go@v2
+      uses: tree-sitter/parser-test-action/go@v3
       if: inputs.test-go == 'true'
       with:
         go-version: ${{inputs.go-version}}
     - name: Run Swift tests
-      uses: tree-sitter/parser-test-action/swift@v2
+      uses: tree-sitter/parser-test-action/swift@v3
       if: inputs.test-swift == 'true'
       with:
         swift-version: ${{inputs.swift-version}}
     - name: Run Zig tests
-      uses: tree-sitter/parser-test-action/zig@master
+      uses: tree-sitter/parser-test-action/zig@v3
       if: inputs.test-zig == 'true'
       with:
         zig-version: ${{inputs.zig-version}}

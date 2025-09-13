@@ -91,8 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: tree-sitter/setup-action/cli@v2
-      - uses: tree-sitter/parser-test-action@v2
+      - uses: tree-sitter/parser-test-action@v3
         with:
-          abi-version: 14
           test-rust: true
 ```
