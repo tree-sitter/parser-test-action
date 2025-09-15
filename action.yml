@@ -41,7 +41,7 @@ inputs:
     default: "false"
   go-version:
     description: Go version
-    default: "1.22"
+    default: "1.23"
   test-swift:
     description: Test the Swift bindings
     default: "false"
