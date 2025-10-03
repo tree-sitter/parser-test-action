@@ -58,6 +58,13 @@ test-zig:
 zig-version:
   description: Zig version
   default: "0.15.1"
+
+test-java:
+  description: Test the Java bindings
+  default: "false"
+java-version:
+  description: Java version
+  default: "25"
 ```
 
 ## Example configuration
