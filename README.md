@@ -57,7 +57,7 @@ test-zig:
   default: false
 zig-version:
   description: Zig version
-  default: "0.15.1"
+  default: "0.16.0"
 
 test-java:
   description: Test the Java bindings
@@ -96,7 +96,7 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: tree-sitter/setup-action/cli@v2
       - uses: tree-sitter/parser-test-action@v3
         with:

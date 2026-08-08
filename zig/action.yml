@@ -4,7 +4,7 @@ description: Test a tree-sitter parser in Zig
 inputs:
   zig-version:
     description: Zig version
-    default: "0.15.1"
+    default: "0.16.0"
 
 runs:
   using: composite
