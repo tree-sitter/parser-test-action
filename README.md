@@ -43,7 +43,7 @@ test-go:
   default: false
 go-version:
   description: Go version
-  default: "1.23"
+  default: "1.26"
 
 test-swift:
   description: Test the Swift bindings
