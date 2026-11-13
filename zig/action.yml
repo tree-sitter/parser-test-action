@@ -10,10 +10,9 @@ runs:
   using: composite
   steps:
     - name: Set up Zig
-      uses: mlugg/setup-zig@v2
+      uses: vercel-labs/setup-zig@v1
       with:
         version: ${{inputs.zig-version}}
-        use-tool-cache: true
     - name: Build module
       shell: sh
       run: zig build
