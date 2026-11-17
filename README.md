@@ -50,7 +50,7 @@ test-swift:
   default: false
 swift-version:
   description: Swift version
-  default: "6.1"
+  default: "6.4"
 
 test-zig:
   description: Test the Zig bindings

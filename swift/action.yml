@@ -4,7 +4,7 @@ description: Test a tree-sitter parser in Swift
 inputs:
   swift-version:
     description: Swift version
-    default: "6.1"
+    default: "6.4"
 
 runs:
   using: composite
