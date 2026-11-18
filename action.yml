@@ -76,9 +76,9 @@ runs:
           grammar_dir=$(dirname "$grammar")
           cd "$grammar_dir"
           tree-sitter generate
+          git diff --exit-code -- src/parser.c src/grammar.json src/node-types.json src/tree-sitter
           cd - > /dev/null
         done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
-        git diff --exit-code -- $(find . -name parser.c -not -path './node_modules/*' -not -path './.build/*')
       env:
         TREE_SITTER_ABI_VERSION: ${{inputs.abi-version}}
     - name: Run parser tests
